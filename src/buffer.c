@@ -2,7 +2,11 @@
 
 #include <string.h>
 
-// Resets state variables
+/**
+ * @brief Resets state variables of the specified buffer.
+ * 
+ * @param pBuffer Pointer to a buffer structure.
+ */
 void buffer_resetState(buffer_t * const pBuffer)
 {
     pBuffer->count = 0;
@@ -10,7 +14,6 @@ void buffer_resetState(buffer_t * const pBuffer)
     pBuffer->tail = 0;
 }
 
-// Creates a new buffer
 int buffer_create(buffer_t * const pBuffer, const size_t szUnit, const size_t ciMax)
 {
 	// Template buffer to initialise const values
@@ -33,7 +36,6 @@ int buffer_create(buffer_t * const pBuffer, const size_t szUnit, const size_t ci
 	return buffer_clear(pBuffer);
 }
 
-// Pushes a new value onto a buffer
 int buffer_push(buffer_t * const pBuffer, void * const pData, const buffer_writeflag_t flags)
 {
     uint8_t bOverwrite = 0;
@@ -75,7 +77,6 @@ int buffer_push(buffer_t * const pBuffer, void * const pData, const buffer_write
     return 0;
 }
 
-// Retrieves the newest value from a buffer
 int buffer_pop(buffer_t * const pBuffer, void * const pData, const buffer_readflag_t flags)
 {
     size_t nextHead = 0;
@@ -112,7 +113,6 @@ int buffer_pop(buffer_t * const pBuffer, void * const pData, const buffer_readfl
     return 0;
 }
 
-// Retrieves the oldest value from a buffer
 int buffer_shift(buffer_t * const pBuffer, void * const pData, const buffer_readflag_t flags)
 {
     size_t nextTail = 0;
@@ -145,7 +145,6 @@ int buffer_shift(buffer_t * const pBuffer, void * const pData, const buffer_read
     return 0;
 }
 
-// Clears a buffer
 int buffer_clear(buffer_t * const pBuffer)
 {
     // Make sure buffer exists

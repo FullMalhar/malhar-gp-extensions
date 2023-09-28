@@ -38,18 +38,54 @@ typedef uint8_t buffer_writeflag_t;
  */
 int buffer_create(buffer_t * const pBuffer, const size_t szUnit, const size_t ciMax);
 
-// Pushes a new value onto a buffer
+/**
+ * @brief Pushes a new value onto the specified buffer.
+ * 
+ * @param pBuffer   Pointer to a buffer structure. 
+ * @param pData     Pointer to new data to be pushed. 
+ * @param flags     Buffer write flags.
+ * @return int      Zero if successful.
+ */
 int buffer_push(buffer_t * const pBuffer, void * const pData, const buffer_writeflag_t flags);
 
-// Retrieves the newest value from a buffer
+/**
+ * @brief Retrieves the newest value from the specified buffer.
+ * 
+ * @param pBuffer   Pointer to a buffer structure.
+ * @param pData     Pointer to location where retrieved data is to be stored.
+ * @param flags     Buffer read flags.
+ * @return int      Zero if successful. 
+ */
 int buffer_pop(buffer_t * const pBuffer, void * const pData, const buffer_readflag_t flags);
+
+/**
+ * @brief Retrieves the newest value from the specified buffer without clearing the value or the buffer.
+ * 
+ */
 #define buffer_peek(pBuffer, pData) buffer_pop(pBuffer, pData, 0)
 
-// Retrieves the oldest value from a buffer
+/**
+ * @brief Retrieves the oldest value from the specified buffer.
+ * 
+ * @param pBuffer   Pointer to a buffer structure.
+ * @param pData     Pointer to location where retrieved data is to be stored.
+ * @param flags     Buffer read flags.
+ * @return int      Zero if successful. 
+ */
 int buffer_shift(buffer_t * const pBuffer, void * const pData, const buffer_readflag_t flags);
+
+/**
+ * @brief Retrieves the oldest value from the specified buffer without clearing the value or the buffer.
+ * 
+ */
 #define buffer_spy(pBuffer, pData) buffer_shift(pBuffer, pData, 0)
 
-// Clears a buffer
+/**
+ * @brief Clears the specified buffer
+ * 
+ * @param pBuffer   Pointer to a buffer structure.
+ * @return int      Zero if successful. 
+ */
 int buffer_clear(buffer_t * const pBuffer);
 
 #ifdef _cplusplus
